@@ -1,1 +1,25 @@
-<div style="color: red;">ss</div>
+<script>
+    Notification.requestPermission(function (permission) {
+		if(permission == 'granted'){
+			regNotifyWorker();
+		}
+	})
+	function regNotifyWorker(){
+		navigator.serviceWorker.getRegistration('./').then(function(sw){
+		if(sw){
+			sw.unregister().then(function(){afterDelete();});
+		}
+		else{
+			afterDelete();
+		}
+		});	
+	}
+	function afterDelete(){
+		navigator.serviceWorker.register('1.js', {scope: './'}).then(function(x){
+			console.log('success-reg'); 	
+			navigator.serviceWorker.ready.then(function(reg) {
+				reg.active.postMessage('hello');
+			});
+		});		
+	}
+</script>
