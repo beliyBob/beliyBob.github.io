@@ -14,12 +14,25 @@
 		}
 		});	
 	}
-	function afterDelete(){
+	/*function afterDelete2(){
 		navigator.serviceWorker.register('1.js', {scope: './'}).then(function(x){
 			console.log('success-reg'); 	
 			navigator.serviceWorker.ready.then(function(reg) {
 				reg.active.postMessage('hello');
 			});
 		});		
+	}*/
+	function afterDelete(){
+		navigator.serviceWorker.register('1.js', {scope: './'}).then(function(x){
+			console.log('success-reg'); 	
+			navigator.serviceWorker.ready.then(function(reg) {
+				reg.pushManager.getSubscription()
+					.then(function(){
+						debugger;
+					});
+				reg.active.postMessage('hello');
+			});
+		});		
 	}
 </script>
+

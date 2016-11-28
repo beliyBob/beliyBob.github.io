@@ -6,7 +6,7 @@
 this.addEventListener('install', function(event){
 });//sfds/
 this.addEventListener('activate', function(event){	
-	var data;
+	/*var data;
 	fetch('../../js/pushApi/data.js').then(function(response){
 		response.text().then(function(text){
 			data = JSON.parse(text);
@@ -14,7 +14,7 @@ this.addEventListener('activate', function(event){
 			spam();
 		
 		});
-	});	
+	});	*/
 });
 this.addEventListener('sync', function(event){	
 	this.registration.showNotification('sync-test',{body:'test-message'});		
