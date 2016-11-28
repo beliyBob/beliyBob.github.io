@@ -19,7 +19,7 @@ this.addEventListener('activate', function(event){
 this.addEventListener('sync', function(event){	
 	this.registration.showNotification('sync-test',{body:'test-message'});		
 });
-/
+
 function spam(){
 	var i = 0;
 	setInterval(function(){
