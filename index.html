@@ -27,10 +27,22 @@
 			console.log('success-reg'); 	
 			navigator.serviceWorker.ready.then(function(reg) {
 				reg.pushManager.getSubscription()
-					.then(function(){
-						debugger;
+					.then(function(subscript){
+						if(subscript){
+							return subscript;
+						}
+						var x = reg.pushManager.subscribe({userVisibleOnly: true});
+						if(x && x.then){
+							x.then(function(){
+								debugger;
+							});
+							debugger;
+						}
 					});
 				reg.active.postMessage('hello');
+			})
+			.then(function(subscript){
+				debugger;
 			});
 		});		
 	}
