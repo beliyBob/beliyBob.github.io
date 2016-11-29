@@ -16,6 +16,10 @@ this.addEventListener('activate', function(event){
 		});
 	});	*/
 });
+this.addEventListener('push', function(event){
+	debugger;
+	event.waitUntil(self.registration.showNotification('title', 'options'));
+})
 this.addEventListener('sync', function(event){	
 	this.registration.showNotification('sync-test',{body:'test-message'});		
 });
