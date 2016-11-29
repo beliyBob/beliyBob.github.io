@@ -1,0 +1,54 @@
+<link rel="manifest" href="google-services.json">
+<script>
+    Notification.requestPermission(function (permission) {
+		if(permission == 'granted'){
+			regNotifyWorker();
+		}
+	})
+	function regNotifyWorker(){
+		navigator.serviceWorker.getRegistration('./').then(function(sw){
+		if(sw){
+			sw.unregister().then(function(){afterDelete();});
+		}
+		else{
+			afterDelete();
+		}
+		});	
+	}
+	/*function afterDelete2(){
+		navigator.serviceWorker.register('1.js', {scope: './'}).then(function(x){
+			console.log('success-reg'); 	
+			navigator.serviceWorker.ready.then(function(reg) {
+				reg.active.postMessage('hello');
+			});
+		});		
+	}*/
+	function afterDelete(){
+		navigator.serviceWorker.register('1.js', {scope: './'}).then(function(x){
+			console.log('success-reg'); 	
+			navigator.serviceWorker.ready.then(function(reg) {
+				reg.pushManager.getSubscription()
+					.then(function(subscript){
+						if(subscript){
+							return subscript;
+						}
+						var x = reg.pushManager.subscribe({
+							userVisibleOnly: true,
+							applicationServerKey: 'BKyZPbnsiaKHMLsxNFw-TM0cJMWhXBdEREzgBMFiqxuE2M8785_q3Ksry8-IWG2-JJ8uQeLdf9s_yZcZyDHFngE'
+						});
+						if(x && x.then){
+							x.then(function(){
+								debugger;
+							});
+							debugger;
+						}
+					});
+				reg.active.postMessage('hello');
+			})
+			.then(function(subscript){
+				debugger;
+			});
+		});		
+	}
+</script>
+
